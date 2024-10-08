@@ -166,6 +166,7 @@ if __name__ == "__main__":
         required=True,
         help="The relative path of the model that needs to be evaluated",
     )
+    
     parser.add_argument(
         "--model-hyper-params",
         type=str,

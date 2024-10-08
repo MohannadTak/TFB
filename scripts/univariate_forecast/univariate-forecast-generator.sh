@@ -5,7 +5,7 @@ timeout=60000
 script_path="./scripts/run_benchmark.py"
 
 # Define the output file
-output_file="univariate-forecast.sh"
+output_file="scripts/univariate_forecast/univariate-forecast.sh"
 
 
 # Function to generate the long hyperparameter string for group 3 (Yearly)
@@ -199,23 +199,27 @@ for group in 1 2 3 4; do
         # Group 1
         model_names_group1=$(quote_model_names "${model_group_1[@]}")
         echo "python $script_path --config-path \"${config_paths[$i]}\" --save-path \"${save_paths[$i]}\" --gpus $gpus --num-workers $num_workers --timeout $timeout --model-name ${model_names_group1}" >> "$output_file"
+        # echo "echo \"Finished running Group 1 ${save_paths[$i]}\"" >> "$output_file"
         ;;
       2)
         # Group 2
         model_names_group2=$(quote_model_names "${model_group_2[@]}")
         echo "python $script_path --config-path \"${config_paths[$i]}\" --save-path \"${save_paths[$i]}\" --gpus $gpus --num-workers $num_workers --timeout $timeout --model-name ${model_names_group2}" >> "$output_file"
+        # echo "echo \"Finished running Group 2 ${save_paths[$i]}\"" >> "$output_file"
         ;;
       3)
         # Group 3
         model_names_group3=$(quote_model_names "${model_group_3[@]}")
         adapter_group3=$(quote_model_names "${adapter_group_3[@]}")
         echo "python $script_path --config-path \"${config_paths[$i]}\" --save-path \"${save_paths[$i]}\" --gpus $gpus --num-workers $num_workers --timeout $timeout --model-name ${model_names_group3} --model-hyper-params ${model_hyperparams_group_3[$i]} --adapter ${adapter_group3}" >> "$output_file"
+        # echo "echo \"Finished running Group 3 ${save_paths[$i]}\"" >> "$output_file"
         ;;
       4)
         # Group 4
         model_names_group4=$(quote_model_names "${model_group_4[@]}")
         adapter_group4=$(quote_model_names "${adapter_group_4[@]}")
         echo "python $script_path --config-path \"${config_paths[$i]}\" --save-path \"${save_paths[$i]}\" --gpus $gpus --num-workers $num_workers --timeout $timeout --model-name ${model_names_group4} --model-hyper-params ${model_hyperparams_group_4[$i]} --adapter ${adapter_group4}" >> "$output_file"
+        # echo "echo \"Finished running Group 4 ${save_paths[$i]}\"" >> "$output_file"  
         ;;
     esac
   done
